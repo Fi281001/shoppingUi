@@ -1,7 +1,10 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
-import { useRoute } from "@react-navigation/native";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Header from "../components/Header";
+
+import { CartContext } from "../Context/CartContext";
+
 const colorsArray = [
   "#91A1B0",
   "#B11D1D",
@@ -13,9 +16,24 @@ const colorsArray = [
 const ProductDetailsScreen = ({}) => {
   const route = useRoute();
   const { image, title, id, price } = route.params;
+
   const [selectedSize, setSelectedSize] = useState("M");
   const [selectedColor, setSelectedColor] = useState("#B11D1D");
 
+  const nav = useNavigation();
+  // add to cart
+  const { addToCart } = useContext(CartContext);
+  const handleAdd = () => {
+    const updatedItem = {
+      ...route.params,
+      size: selectedSize,
+      color: selectedColor,
+    };
+    addToCart(updatedItem);
+    console.log("updatedItem:", updatedItem);
+
+    nav.navigate("Cart");
+  };
   return (
     <View style={{ flex: 1 }}>
       <Header />
@@ -117,7 +135,12 @@ const ProductDetailsScreen = ({}) => {
           })}
         </View>
         <View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              handleAdd();
+            }}
+          >
             <Text style={styles.buttonText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>

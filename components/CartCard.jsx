@@ -1,24 +1,27 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { fonts } from "../utils/fonts";
+import { CartContext } from "../Context/CartContext";
 
-const CartCard = ({}) => {
+const CartCard = ({ item }) => {
+  const { deleteToCart } = useContext(CartContext);
+  const handleDelete = (id) => {
+    deleteToCart(id);
+  };
   return (
     <View style={styles.card}>
-      <Image source={require("../images/human.png")} style={styles.image} />
+      <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.content}>
-        <Text style={styles.title}>ssssssss</Text>
-        <Text style={styles.price}>$60</Text>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.price}>${item.price}</Text>
         <View style={styles.textCircleContainer}>
-          <View style={[styles.circle, { backgroundColor: "red" }]}></View>
+          <View style={[styles.circle, { backgroundColor: item.color }]}></View>
           <View style={styles.sizeContainer}>
-            <Text style={styles.sizeText}>xl</Text>
+            <Text style={styles.sizeText}>{item.size}</Text>
           </View>
         </View>
       </View>
-      <TouchableOpacity
-      //</View>onPress={() => handleDelete(item.id)}
-      >
+      <TouchableOpacity onPress={() => handleDelete(item.id)}>
         <Image
           source={require("../images/delete.png")}
           style={styles.deleteIcon}

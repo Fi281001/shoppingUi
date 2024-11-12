@@ -1,13 +1,24 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import React, { useContext } from "react";
 import CartCard from "../components/CartCard";
 import { useNavigation } from "@react-navigation/native";
-const CartScreen = () => {
+import { CartContext } from "../Context/CartContext";
+
+const CartScreen = ({}) => {
   const nav = useNavigation();
 
   const handleBack = () => {
     nav.goBack();
   };
+
+  const { carts, total } = useContext(CartContext);
   return (
     <View style={styles.cartcontainer}>
       <View style={styles.header}>
@@ -29,7 +40,13 @@ const CartScreen = () => {
       </View>
       {/* cart list */}
       <View style={styles.cart}>
-        <CartCard />
+        <FlatList
+          data={carts}
+          renderItem={({ item }) => {
+            return <CartCard item={item} />;
+          }}
+          keyExtractor={(item) => item.id} // Chắc chắn rằng mỗi phần tử có một key duy nhất
+        />
       </View>
 
       {/* footer cart check out */}
@@ -37,7 +54,7 @@ const CartScreen = () => {
         <View style={styles.bottomContentContainer}>
           <View style={styles.flexRowContainer}>
             <Text style={styles.titleText}>Total:</Text>
-            <Text style={styles.priceText}>$22222</Text>
+            <Text style={styles.priceText}>${total().toFixed(2)}</Text>
           </View>
           <View style={styles.flexRowContainer}>
             <Text style={styles.titleText}>Shpping:</Text>
@@ -47,7 +64,7 @@ const CartScreen = () => {
           <View style={styles.flexRowContainer}>
             <Text style={styles.titleText}>Grand Total:</Text>
             <Text style={[styles.priceText, styles.grandPriceText]}>
-              $hhhhh
+              ${total().toFixed(2)}
             </Text>
           </View>
         </View>
@@ -133,5 +150,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#FFFFFF",
     fontWeight: "700",
+  },
+  cart: {
+    height: "65%",
   },
 });
