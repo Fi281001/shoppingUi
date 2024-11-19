@@ -30,7 +30,6 @@ const ProductDetailsScreen = ({}) => {
       color: selectedColor,
     };
     addToCart(updatedItem);
-    console.log("updatedItem:", updatedItem);
 
     nav.navigate("Cart");
   };
@@ -186,9 +185,9 @@ const styles = StyleSheet.create({
   },
   sizeValueContainer: {
     backgroundColor: "#FFFFFF",
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: 50,
+    width: 50,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 5,

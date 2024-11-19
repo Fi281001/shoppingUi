@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   productContainer: {
+    width: "100%",
     flex: 1,
     borderRadius: 10,
     shadowColor: "#000",
@@ -80,12 +81,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-
     backgroundColor: "#fff",
     zIndex: 10,
   },
   image: {
-    width: 167,
+    width: "100%",
     height: 256,
     borderRadius: 10,
     marginBottom: 10,
