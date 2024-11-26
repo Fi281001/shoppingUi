@@ -5,13 +5,10 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import data from "../data/data.json";
 import { useNavigation } from "@react-navigation/native";
-
-const { width } = Dimensions.get("window"); // Chiều rộng màn hình thiết bị
 
 const ProductCard = () => {
   const [products, useProducts] = useState(data.products);
@@ -58,16 +55,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   productContainer: {
-    width: (width - 40) / 2, // Cập nhật chiều rộng cho 2 cột
+    width: "100%", // Cập nhật chiều rộng cho 2 cột
     flex: 1,
     borderRadius: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
     margin: 10,
     position: "relative",
+    shadowOffset: { width: 0, height: 4 }, // Thêm bóng đổ cho container
   },
   heartIcon: {
     width: 20, // Điều chỉnh lại kích thước cho phù hợp

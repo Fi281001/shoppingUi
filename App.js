@@ -57,6 +57,8 @@ const AppTabs = () => {
         headerShown: false,
         tabBarStyle: {
           height: 60,
+          paddingBottom: 20,
+          marginBottom: 10,
         },
       })}
     >
@@ -67,7 +69,7 @@ const AppTabs = () => {
           tabBarStyle: {
             display: getTabBarVisibility(route) ? "flex" : "none",
             height: 60,
-            paddingBottom: 10,
+            paddingBottom: 20,
             marginBottom: 10,
           },
         })}
