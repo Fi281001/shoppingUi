@@ -12,7 +12,7 @@ import AccountScreen from "./screen/AccountScreen";
 import Icon from "react-native-vector-icons/Ionicons";
 import { CartContext, CartProvider } from "./Context/CartContext";
 import { useContext } from "react";
-
+import { SafeAreaView, StyleSheet, View } from "react-native";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -25,11 +25,12 @@ const MyHomeStack = () => {
     </Stack.Navigator>
   );
 };
+
 const getTabBarVisibility = (route) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
-  // Nếu đang ở màn hình ProductDetails thì ẩn Tab Bar
   return routeName !== "ProductDetails";
 };
+
 const AppTabs = () => {
   const { getCartCount } = useContext(CartContext); // Đảm bảo gọi useContext bên trong CartProvider
 
@@ -55,7 +56,7 @@ const AppTabs = () => {
         tabBarInactiveTintColor: "gray",
         headerShown: false,
         tabBarStyle: {
-          height: 90,
+          height: 60,
         },
       })}
     >
@@ -65,7 +66,9 @@ const AppTabs = () => {
         options={({ route }) => ({
           tabBarStyle: {
             display: getTabBarVisibility(route) ? "flex" : "none",
-            height: 90,
+            height: 60,
+            paddingBottom: 10,
+            marginBottom: 10,
           },
         })}
       />
@@ -84,12 +87,30 @@ const AppTabs = () => {
     </Tab.Navigator>
   );
 };
+
 export default function App() {
   return (
     <CartProvider>
       <NavigationContainer>
+        {/* <SafeAreaView style={styles.safeArea}> */}
         <AppTabs />
+        {/* </SafeAreaView> */}
       </NavigationContainer>
     </CartProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "yellow", // Màu nền toàn bộ
+  },
+  safeAreaTop: {
+    backgroundColor: "red", // Màu cho khu vực trên
+    // flex: 1,
+  },
+  safeAreaBottom: {
+    backgroundColor: "black", // Màu cho khu vực dưới
+    flex: 1,
+  },
+});

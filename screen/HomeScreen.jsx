@@ -14,7 +14,7 @@ import ProductCard from "../components/ProductsCard";
 
 const { height } = Dimensions.get("window");
 const HomeScreen = () => {
-  const totalHeightToSubtract = 116 + 56 + 50 + 44 + 90;
+  const totalHeightToSubtract = 140 + 56 + 44 + 50 + 60;
 
   // Tính chiều cao còn lại
   const remainingHeight = height - totalHeightToSubtract;

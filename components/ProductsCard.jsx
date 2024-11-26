@@ -5,10 +5,14 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import data from "../data/data.json";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+
+const { width } = Dimensions.get("window"); // Chiều rộng màn hình thiết bị
+
 const ProductCard = () => {
   const [products, useProducts] = useState(data.products);
   const navigation = useNavigation();
@@ -21,6 +25,7 @@ const ProductCard = () => {
       price: item.price,
     });
   };
+
   return (
     <FlatList
       data={products}
@@ -53,11 +58,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   productContainer: {
-    width: "100%",
+    width: (width - 40) / 2, // Cập nhật chiều rộng cho 2 cột
     flex: 1,
     borderRadius: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
@@ -65,16 +70,16 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   heartIcon: {
-    width: 20, // Adjust size
-    height: 20, // Adjust size
+    width: 20, // Điều chỉnh lại kích thước cho phù hợp
+    height: 20, // Điều chỉnh lại kích thước cho phù hợp
   },
   heartIconContainer: {
     position: "absolute",
     top: 10,
-    right: 20,
+    right: 10, // Điều chỉnh vị trí icon sao cho vừa vặn với màn hình
     width: 34,
     height: 34,
-    borderRadius: 20,
+    borderRadius: 17, // Điều chỉnh cho icon tròn
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 256,
+    height: 200, // Thay đổi chiều cao cho phù hợp với mọi màn hình
     borderRadius: 10,
     marginBottom: 10,
   },
