@@ -1,14 +1,28 @@
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import React from "react";
 import Header from "../components/Header";
 import Tags from "../components/Tags";
 import ProductCard from "../components/ProductsCard";
 
+const { height } = Dimensions.get("window");
 const HomeScreen = () => {
+  const totalHeightToSubtract = 116 + 56 + 50 + 44 + 90;
+
+  // Tính chiều cao còn lại
+  const remainingHeight = height - totalHeightToSubtract;
   return (
     <View>
       <Header />
-      <View style={{ paddingHorizontal: 20 }}>
+
+      <View style={{ paddingHorizontal: 20, backgroundColor: "yellow" }}>
         <Text style={styles.headingText}>Match Your Style</Text>
         <View style={styles.inputContainer}>
           <Image
@@ -19,7 +33,7 @@ const HomeScreen = () => {
         </View>
       </View>
       <Tags />
-      <View style={styles.productscontainer}>
+      <View style={[styles.productscontainer, { height: remainingHeight }]}>
         <ProductCard />
       </View>
     </View>
@@ -51,8 +65,5 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 18,
     fontFamily: "Poppins-Regular",
-  },
-  productscontainer: {
-    height: "67%",
   },
 });

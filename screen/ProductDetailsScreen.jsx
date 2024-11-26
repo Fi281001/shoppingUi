@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Header from "../components/Header";
@@ -35,115 +42,117 @@ const ProductDetailsScreen = ({}) => {
   };
   return (
     <View style={{ flex: 1 }}>
-      <Header />
-      <View style={{ marginTop: 20 }}>
-        {/* Container cho ảnh */}
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: image }} style={styles.image} />
-        </View>
-
-        {/* Nội dung văn bản */}
-        <View style={styles.contentContainer}>
-          <View style={styles.textContainer}>
-            <Text style={styles.fontText}>{title}</Text>
-            <Text style={styles.fontText}>${price}</Text>
+      <ScrollView>
+        <Header />
+        <View style={{ marginTop: 20 }}>
+          {/* Container cho ảnh */}
+          <View style={styles.imageContainer}>
+            <Image source={{ uri: image }} style={styles.image} />
           </View>
-        </View>
 
-        {/* size */}
-        <Text style={[styles.fontText, styles.sizeText]}>Size</Text>
-        <View style={styles.sizeContainer}>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("S")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "S" && styles.selectedText,
-              ]}
+          {/* Nội dung văn bản */}
+          <View style={styles.contentContainer}>
+            <View style={styles.textContainer}>
+              <Text style={styles.fontText}>{title}</Text>
+              <Text style={styles.fontText}>${price}</Text>
+            </View>
+          </View>
+
+          {/* size */}
+          <Text style={[styles.fontText, styles.sizeText]}>Size</Text>
+          <View style={styles.sizeContainer}>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("S")}
             >
-              S
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("M")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "M" && styles.selectedText,
-              ]}
-            >
-              M
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("L")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "L" && styles.selectedText,
-              ]}
-            >
-              L
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("XL")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "XL" && styles.selectedText,
-              ]}
-            >
-              XL
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/* color */}
-        <Text style={[styles.fontText, styles.sizeText]}>colors</Text>
-        <View style={styles.colorContainer}>
-          {colorsArray.map((color, index) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelectedColor(color)}
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "S" && styles.selectedText,
+                ]}
               >
-                <View
-                  style={[
-                    styles.borderColorCircle,
-                    selectedColor === color && {
-                      borderColor: color,
-                      borderWidth: 2,
-                      borderRadius: 24,
-                    },
-                  ]}
+                S
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("M")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "M" && styles.selectedText,
+                ]}
+              >
+                M
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("L")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "L" && styles.selectedText,
+                ]}
+              >
+                L
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("XL")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "XL" && styles.selectedText,
+                ]}
+              >
+                XL
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* color */}
+          <Text style={[styles.fontText, styles.sizeText]}>colors</Text>
+          <View style={styles.colorContainer}>
+            {colorsArray.map((color, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => setSelectedColor(color)}
                 >
                   <View
-                    style={[styles.colorCircle, { backgroundColor: color }]}
-                  ></View>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
+                    style={[
+                      styles.borderColorCircle,
+                      selectedColor === color && {
+                        borderColor: color,
+                        borderWidth: 2,
+                        borderRadius: 24,
+                      },
+                    ]}
+                  >
+                    <View
+                      style={[styles.colorCircle, { backgroundColor: color }]}
+                    ></View>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          <View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                handleAdd();
+              }}
+            >
+              <Text style={styles.buttonText}>Add to Cart</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              handleAdd();
-            }}
-          >
-            <Text style={styles.buttonText}>Add to Cart</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

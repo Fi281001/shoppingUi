@@ -54,6 +54,9 @@ const AppTabs = () => {
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
         headerShown: false,
+        tabBarStyle: {
+          height: 90,
+        },
       })}
     >
       <Tab.Screen
@@ -62,6 +65,7 @@ const AppTabs = () => {
         options={({ route }) => ({
           tabBarStyle: {
             display: getTabBarVisibility(route) ? "flex" : "none",
+            height: 90,
           },
         })}
       />
