@@ -22,7 +22,7 @@ const HomeScreen = () => {
     <View>
       <Header />
 
-      <View style={{ paddingHorizontal: 20, backgroundColor: "yellow" }}>
+      <View style={{ paddingHorizontal: 20 }}>
         <Text style={styles.headingText}>Match Your Style</Text>
         <View style={styles.inputContainer}>
           <Image

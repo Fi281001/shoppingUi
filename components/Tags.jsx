@@ -48,7 +48,6 @@ export default Tags;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    backgroundColor: "pink",
   },
 
   tagContainer: {
